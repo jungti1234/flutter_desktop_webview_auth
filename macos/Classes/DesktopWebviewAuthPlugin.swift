@@ -42,21 +42,21 @@ public class WebviewController: NSViewController, WKNavigationDelegate {
     }
     
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        if navigationAction.navigationType == .formSubmitted {
-            // Call the decisionHandler to allow the navigation to continue
-            decisionHandler(.allow)
-            return
-        }
-
+        // Call the decisionHandler to allow the navigation to continue
         guard let url = navigationAction.request.url else {
             decisionHandler(.allow);
             return
         }
-        
+
+        guard let host = url.host else {
+            decisionHandler(.allow);
+            return
+        }
+
+        let exactUrl = url.scheme! + "://" + host + url.path
         let uriString = url.absoluteString
-        
-        if uriString.contains(targetUriFragment!) { // not called
+
+        if (exactUrl == targetUriFragment!) { // not called
             decisionHandler(.cancel)
             onComplete!(uriString)
             dismiss(self)
