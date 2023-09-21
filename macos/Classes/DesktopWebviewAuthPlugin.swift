@@ -24,7 +24,7 @@ public class WebviewController: NSViewController, WKNavigationDelegate {
     }
     
     func loadUrl(_ url: String) {
-        clearCookies()
+        // clearCookies()
         
         let url = URL(string: url)!
         let request = URLRequest(url: url)

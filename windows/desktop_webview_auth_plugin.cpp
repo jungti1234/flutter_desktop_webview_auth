@@ -93,7 +93,7 @@ namespace {
 		HRESULT UrlChangedCallback(const string url);
 
 		//  Clear coockies of the current WebView.
-		bool ClearCookies();
+		// bool ClearCookies();
 	};
 
 	LRESULT CALLBACK WinProc(HWND hWindow, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -126,7 +126,7 @@ namespace {
 		break;
 		case WM_DESTROY:
 		{
-			ClearCookies();
+			// ClearCookies();
 			redirectUrl_ = "";
 			initialUrl_ = "";
 			webview_->remove_NavigationCompleted(navigationToken);
